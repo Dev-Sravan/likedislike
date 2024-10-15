@@ -1,0 +1,1 @@
+export { default as Likedislike } from "./like-dislike";
