@@ -4,21 +4,23 @@ import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-// import postcss from "rollup-plugin-postcss";
+
 
 const packageJson = require("./package.json");
 
 export default [
   {
+    treeshake: false,
     input: "src/index.ts",
     output: [
       {
-        file: packageJson.main,
+        // file: packageJson.main,
+        dir: 'dist',
         format: "cjs",
         sourcemap: true,
-      },
-      {
-        file: packageJson.module,
+      },  {
+        // file: packageJson.module,
+        dir: 'dist',
         format: "esm",
         sourcemap: true,
       },
@@ -27,13 +29,13 @@ export default [
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({ 
+        tsconfig: "./tsconfig.json",
+      }),
       terser(),
-    //   postcss(),
     ],
     external: ["react", "react-dom",],
     onwarn(warning, warn) {
-        // Ignore "Module level directives cause errors when bundled"
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return;
         warn(warning);
       },

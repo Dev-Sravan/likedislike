@@ -6,12 +6,12 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-const Likedislike = () => {
-    const [message, setMessage] = useState('');
-    const [isLike, setIsLike] = useState(false);
-    const [isDisLike, setIsDisLike] = useState(false);
-    const [isShare, setIsShare] = useState(false);
-    const [isRegenerate, setIsRegenerate] = useState(false);
+const Likedislike: React.FC = () => {
+    const [message, setMessage] = useState<string>('');
+    const [isLike, setIsLike] = useState<boolean>(false);
+    const [isDisLike, setIsDisLike] = useState<boolean>(false);
+    const [isShare, setIsShare] = useState<boolean>(false);
+    const [isRegenerate, setIsRegenerate] = useState<boolean>(false);
 
     // Handle Like button logic
     const handleLike = async () => {
@@ -25,7 +25,6 @@ const Likedislike = () => {
             if (response.ok) {
                 const data = await response.json();
                 setMessage(data.message);
-                // setIsLike(data.message.includes('true'));  // Set the like state based on the backend response
             } else {
                 setMessage('Error toggling like');
             }
@@ -33,7 +32,6 @@ const Likedislike = () => {
             setMessage('Error toggling like');
         }
     };
-    
 
     // Handle Dislike button logic
     const handleDislike = async () => {
@@ -95,28 +93,28 @@ const Likedislike = () => {
 
     return (
         <div>
-            <Tooltip title="Like" placement='top-end' arrow>
+            <Tooltip title="Like" placement="top-end" arrow>
                 <IconButton onClick={handleLike} style={{
                     color: isLike ? 'blue' : 'grey'  // Blue on odd clicks, grey on even clicks
                 }}>
                     <ThumbUpAltOutlinedIcon />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Dislike" placement='top-end' arrow>
+            <Tooltip title="Dislike" placement="top-end" arrow>
                 <IconButton onClick={handleDislike} style={{
                     color: isDisLike ? 'blue' : 'grey'  // Blue on odd clicks, grey on even clicks
                 }}>
                     <ThumbDownAltOutlinedIcon />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Share" placement='top-end' arrow>
+            <Tooltip title="Share" placement="top-end" arrow>
                 <IconButton onClick={handleShare} color="default" style={{
                     color: isShare ? 'blue' : 'grey'  // Toggle between blue and grey
                 }}>
                     <ShareIcon />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Regenerate" placement='top-end' arrow>
+            <Tooltip title="Regenerate" placement="top-end" arrow>
                 <IconButton onClick={handleRegenerate} color="default" style={{
                     color: isRegenerate ? 'blue' : 'grey'  // Toggle between blue and grey
                 }}>
